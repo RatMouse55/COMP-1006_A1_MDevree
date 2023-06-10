@@ -18,7 +18,7 @@
     </header>
 
     <main>
-        <h1>i cooka da pizza</h1>
+        <h1>Merik's Pizza</h1>
         <h2>Order Details</h2>
         <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div id="pizza-configuration">
@@ -95,6 +95,7 @@
                     $topping = $database->sanitize($topping);
                     $result .= $topping . ", ";
                 }
+                //this does not work idk why
                 $pizza = $size . " pizza with " . $result;
                 $database->create($fname, $lname, $email, $phone, $del_address, $pizza);
                 echo '<script>alert("order placed")</script>';

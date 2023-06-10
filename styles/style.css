@@ -2,6 +2,8 @@ body {
     background-color: #2b2c28;
     margin: 0;
 }
+
+/* NAV STYLING */
 nav {
     display: flex;
     background-color: #dd1c1a;
@@ -29,10 +31,12 @@ a:active {
     color: #3b3b3b;
     background-color: #9e1614;
 }
+
 h1 {
     font-size: 3.4rem;
 }
 
+/* here begins the form */
 main {
     width: 90%;
     margin: 0 auto;

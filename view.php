@@ -23,7 +23,7 @@ $res = $database->read();
     </header>
 
     <main>
-        <h1>i cooka da pizza</h1>
+        <h1>Merik's Pizza</h1>
         <h2>Order Queue</h2>
         <table>
             <tr>
