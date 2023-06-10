@@ -5,7 +5,7 @@ CREATE TABLE orders (
     email VARCHAR(255) NOT NULL,
     phone VARCHAR(255) NOT NULL,
     del_address VARCHAR(255) NOT NULL,
-    order VARCHAR(255) NOT NULL,
+    pizza VARCHAR(255) NOT NULL,
     PRIMARY KEY (id)
 );
 

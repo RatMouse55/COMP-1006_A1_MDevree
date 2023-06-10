@@ -1,0 +1,17 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+table,
+th,
+td {
+    background-color: #3b3b3b;
+    border: 1px solid black;
+}
+
+/* zebra stripe rows */
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}

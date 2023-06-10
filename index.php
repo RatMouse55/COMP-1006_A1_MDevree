@@ -12,7 +12,7 @@
 <body>
     <header>
         <nav>
-            <a href="#">View Queue</a>
+            <a href="view.php">View Queue</a>
             <a href="index.php">Place Order</a>
         </nav>
     </header>
@@ -20,7 +20,7 @@
     <main>
         <h1>i cooka da pizza</h1>
         <h2>Order Details</h2>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <div id="pizza-configuration">
                 <div>
                     <label for="size">Size:</label>
@@ -82,25 +82,26 @@
 
         <div class="form-submit">
             <?php
-            require_once "database.php";
+            require_once('database.php');
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                if (isset($_POST['size']) && isset($_POST['toppings']) && isset($_POST['fname']) && isset($_POST['lname']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['del_address'])) {
-                    if (!empty($_POST['size']) && !empty($_POST['toppings']) && !empty($_POST['fname']) && !empty($_POST['lname']) && !empty($_POST['email']) && !empty($_POST['phone']) && !empty($_POST['del_address'])) {
-                        $size = $database->sanitize($_POST['size']);
-                        $toppings = $database->sanitize($_POST['toppings']);
-                        $fname = $database->sanitize($_POST['fname']);
-                        $lname = $database->sanitize($_POST['lname']);
-                        $email = $database->sanitize($_POST['email']);
-                        $phone = $database->sanitize($_POST['phone']);
-                        $del_address = $database->sanitize($_POST['address']);
-                        $order = $size . " pizza with " . implode(", ", $toppings);
-                        $database->create($fname, $lname, $email, $phone, $del_address, $order);
-                        echo "Order placed!";
-                    } else {
-                        echo "Please fill out all fields";
-                    }
+                $size = $database->sanitize($_POST['size']);
+                $toppings = $database->sanitize($_POST['toppings[]']);
+                $fname = $database->sanitize($_POST['fname']);
+                $lname = $database->sanitize($_POST['lname']);
+                $email = $database->sanitize($_POST['email']);
+                $phone = $database->sanitize($_POST['phone']);
+                $del_address = $database->sanitize($_POST['address']);
+                foreach ($toppings as $topping) {
+                    $topping = $database->sanitize($topping);
+                    $result .= $topping . ", ";
                 }
+                $pizza = $size . " pizza with " . $result;
+                $database->create($fname, $lname, $email, $phone, $del_address, $pizza);
+                echo '<script>alert("order placed")</script>';
+            } else {
+                echo '<script>alert("order failed")</script>';
             }
+
             ?>
         </div>
     </main>
